@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تواصل معنا | قسم BTEC IT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #1e1b4b;
+    }
+  </style>
+</head>
+
+<body class="bg-[#1e1b4b] text-white">
+
+  <!-- العنوان -->
+  <header class="text-center py-12">
+    <h1 class="text-4xl font-bold text-purple-300 mb-2">تواصل معنا</h1>
+    <p class="text-gray-400">نرحب بجميع استفساراتكم ومقترحاتكم</p>
+  </header>
+
+  <!-- قسم التواصل -->
+  <section class="container mx-auto px-4 pb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- النموذج -->
+      <div class="bg-[#0f172a] p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-white mb-6">أرسل رسالة</h3>
+        <form id="contact-form" action="https://formspree.io/f/mvgajpzz" method="POST" class="space-y-4">
+          <div>
+            <label for="name" class="block text-gray-300 mb-2">الاسم الكامل</label>
+            <input type="text" id="name" name="name" class="form-input w-full p-3 rounded-lg bg-white text-black"
+              required autocomplete="off">
+          </div>
+
+          <div>
+            <label for="email" class="block text-gray-300 mb-2">البريد الإلكتروني</label>
+            <input type="email" id="email" name="email" class="form-input w-full p-3 rounded-lg bg-white text-black"
+              required autocomplete="off">
+          </div>
+
+          <div>
+            <label for="subject" class="block text-gray-300 mb-2">الموضوع</label>
+            <select id="subject" name="subject" class="form-input w-full p-3 rounded-lg bg-white text-black" required>
+              <option value="" selected disabled>اختر موضوع الرسالة</option>
+              <option value="inquiry">استفسار عام</option>
+              <option value="admission">استفسار عن القبول</option>
+              <option value="projects">مشاركة مشروع</option>
+              <option value="feedback">ملاحظات أو اقتراحات</option>
+              <option value="other">موضوع آخر</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-gray-300 mb-2">الرسالة</label>
+            <textarea id="message" name="message" rows="5" class="form-input w-full p-3 rounded-lg bg-white text-black"
+              required autocomplete="off"></textarea>
+          </div>
+
+          <!-- كاباتشا بسيطة -->
+          <div>
+            <label class="block mb-2 text-white" id="captcha-label"></label>
+            <input type="text" id="captcha-input" required class="form-input w-full p-3 rounded-lg bg-white text-black"
+              autocomplete="off" />
+            <input type="hidden" id="captcha-answer" />
+            <span id="captcha-error" class="text-red-400 text-sm hidden">إجابة الكاباتشا غير صحيحة</span>
+          </div>
+
+          <button type="submit"
+            class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg w-full transition duration-300">
+            إرسال الرسالة
+          </button>
+          <div id="form-success" class="text-green-400 text-center mt-4 hidden">تم إرسال رسالتك بنجاح!</div>
+        </form>
+      </div>
+
+      <!-- معلومات الاتصال -->
+      <div class="bg-[#0f172a] p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-white mb-4">معلومات التواصل</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="bg-purple-600 p-2 rounded-full mr-3">
+              <i class="fas fa-school text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-white font-medium">مدرسة عائشة أم المؤمنين الأساسية المختلطة</h4>
+              <p class="text-gray-400">لواء سحاب - الأردن</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="bg-purple-600 p-2 rounded-full mr-3">
+              <i class="fas fa-envelope text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-white font-medium"></h4>
+              <p class="text-gray-400"></p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="bg-purple-600 p-2 rounded-full mr-3">
+              <i class="fas fa-phone-alt text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-white font-medium"></h4>
+              <p class="text-gray-400"></p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="bg-purple-600 p-2 rounded-full mr-3">
+              <i class="fas fa-map-marker-alt text-white"></i>
+            </div>
+            <div>
+              <h4 class="text-white font-medium">موقع المدرسة على الخريطة</h4>
+              <a href="https://maps.app.goo.gl/LUdXTu6MdgaXn3WcA" target="_blank"
+                class="text-purple-300 hover:underline break-all">
+                عرض الموقع على Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- زر العودة -->
+  <section class="py-10 text-center bg-[#1e1b4b]">
+    <a href="javascript:history.back()"
+      class="inline-block bg-white text-[#843fd8] font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-200">
+      العودة
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-[#1e1b4b] text-gray-400">
+    جميع الحقوق محفوظة © 2025 - مدرسة عائشة أم المؤمنين
+  </footer>
+
+  <!-- أيقونات Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    // كود الكاباتشا البسيط
+    function generateCaptcha() {
+      const a = Math.floor(Math.random() * 10) + 1;
+      const b = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('captcha-label').textContent = `كم حاصل جمع ${a} + ${b} ؟`;
+      document.getElementById('captcha-answer').value = a + b;
+    }
+    generateCaptcha();
+
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      const answer = document.getElementById('captcha-answer').value;
+      const userInput = document.getElementById('captcha-input').value;
+      if (parseInt(userInput) !== parseInt(answer)) {
+        e.preventDefault();
+        document.getElementById('captcha-error').classList.remove('hidden');
+        generateCaptcha();
+        return false;
+      } else {
+        document.getElementById('captcha-error').classList.add('hidden');
+      }
+      // إظهار رسالة نجاح بعد الإرسال مباشرة
+      setTimeout(function () {
+        document.getElementById('form-success').classList.remove('hidden');
+      }, 100);
+    });
+  </script>
+
+</body>
+
+</html>
