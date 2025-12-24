@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTEC IT - مدرسة عائشة أم المؤمنين الأساسية المختلطة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            right: 0;
+            background-color: #6c54a3;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-3d {
+            transform: translateY(0);
+            box-shadow: 0 4px 0 #5b21b6, 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #4e3a6e, 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-3d:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 #42266e, 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 10px 25px rgba(52, 29, 107, 0.3);
+        }
+
+        .teacher-card {
+            transition: all 0.3s ease;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(23, 10, 54, 0.3);
+        }
+
+        .welcome-animation {
+            animation: welcome 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes welcome {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        /* .news-ticker {  // Removed empty ruleset to fix error */
+        /* Remove old animation */
+        /* animation: ticker 30s linear infinite; */
+        /* } */
+        /* شريط الأخبار RTL من اليسار لليمين بسرعة متوسطة */
+        .news-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: rtl-ticker 35s linear infinite;
+            direction: rtl;
+        }
+
+        @keyframes rtl-ticker {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .rtl-news-ticker {
+            animation: rtl-ticker 35s linear infinite;
+            direction: rtl;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(42, 36, 56, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 1001;
+        }
+
+        .lightbox-prev {
+            right: 20px;
+        }
+
+        .lightbox-next {
+            left: 20px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .form-input {
+            background-color: #3c5e94;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #1d0c44;
+            box-shadow: 0 0 0 2px rgba(42, 20, 95, 0.5);
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 2.5s infinite;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <!-- Navigation Bar -->
+    <nav class="bg-[#1e1b4b] sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                    <img src="./assets/photo_٢٠٢٥-٠٥-٢١_١٢-٥٨-٥٨.png" alt="Pearson BTEC Logo" class="h-12">
+                    <span class="text-xl font-bold text-purple-300">BTEC IT</span>
+                </div>
+
+
+                <button onclick="location.href='./src/home.html'">الصفحة الرئيسية</button>
+                <button onclick="location.href='./src/about.html'">عن القسم</button>
+                <button onclick="location.href='./src/projects.html'">مشاريعنا </button>
+                <button onclick="location.href='./src/teachers.html'">الهيئة التدريسية </button>
+                <button onclick="location.href='./src/library.html'">مكتبة التحميلات-</button>
+                <button onclick="location.href='./src/contact.html'">تواصل معنا -</button>
+                <button onclick="location.href='./src/Success stories.html'">قصص النجاح </button>
+                <button onclick="location.href='./src/developers.html'">نبذه عن مطورين الموقع</button>
+            </div>
+
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+
+    </nav>
+
+    <!-- News Ticker -->
+    <div class="bg-purple-900 py-2 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center">
+                <span class="bg-purple-700 text-white px-3 py-1 rounded-md mr-3">أخبار</span>
+                <div class="overflow-hidden whitespace-nowrap">
+                    <div class="news-ticker rtl-news-ticker inline-block whitespace-nowrap text-white">
+                        <span class="mx-4">• تم إفتتاح موقع قسم BTEC IT رسمياً •</span>
+                        <span class="mx-4">• زياره للمدقق الخارجي يوم الاثنين 26/5/2025 للاطلاع على اعمال طلابنا
+                            المتميزين •</span>
+                        <span class="mx-4">•
+                            يحتفل الأردنيون غدا الأحد، بعيد الاستقلال التاسع والسبعين للمملكة الأردنية الهاشمية، وهم
+                            يواصلون مسيرة البناء والتحديث والتطوير، مستندين إلى إرث عريق وتضحيات نبيلة، فمنذ أن وشَّح
+                            جلالة الملك المؤسس عبدالله الأول في 25 أيار 1946 إعلان استقلال المملكة، مضى الأردنيون بثبات،
+                            تحت الراية الهاشمية، لبناء دولة القانون والمؤسسات وإرساء قواعدها وتقوية أركانها بعزيمتهم
+                            التي لا تلين.•</span>
+                        <span class="mx-4">• مرحبا بك في موقعنا •</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <section id="home" class="relative bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-right">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 welcome-animation">
+                    مرحبًا بكم في موقع قسم <span class="text-purple-300">BTEC IT</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    جيل التكنولوجيا يبدأ من هنا! قسم BTEC IT في مدرسة عائشة أم المؤمنين الأساسية المختلطة - لواء سحاب
+                </p>
+                <div
+                    class="flex flex-col sm:flex-row justify-center md:justify-end space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+                    <a href="#about"
+                        class="btn-3d bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                        تعرف على المزيد
+                    </a>
+                    <a href="https://www.pearson.com/en-us.html" target="_blank"
+                        class="btn-3d bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                        موقع Pearson الرسمي
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center gap-8">
+                <img src="./assets/logo-gov.png" alt="شعار وزارة التربية والتعليم"
+                    class="w-[120px] h-[120px] md:w-[160px] md:h-[160px] object-contain animate-bounce-slow">
+                <img src="./assets/logo-pr.png" alt="شعار Pearson PR"
+                    class="w-[170px] h-[90px] md:w-[220px] md:h-[120px] object-contain animate-bounce-slow">
+            </div>
+        </div>
+
+        <div
+            class="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center w-full flex flex-col items-center">
+            <p class="text-gray-400 mb-2 mx-auto text-center">قم بالتمرير لأسفل</p>
+            <div class="scroll-indicator text-purple-400 text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Future Section -->
+    <section id="future" class="py-16 bg-[#1e1b4b]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-300 mb-12">مستقبل BTEC IT</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">الجامعات والتخصصات</h3>
+                    <p class="text-gray-300 mb-6">
+                        يؤهل برنامج BTEC IT الطلاب للالتحاق بالعديد من الجامعات المحلية والعالمية في تخصصات متنوعة مثل:
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-[#0f172a] p-4 rounded-lg">
+                            <h4 class="text-purple-400 font-medium mb-2">تخصصات الحاسوب</h4>
+                            <ul class="text-gray-300 text-sm space-y-1">
+                                <li>• هندسة الحاسوب</li>
+                                <li>• علم الحاسوب</li>
+                                <li>• أمن المعلومات</li>
+                                <li>• الذكاء الاصطناعي</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-[#0f172a] p-4 rounded-lg">
+                            <h4 class="text-purple-400 font-medium mb-2">تخصصات تقنية</h4>
+                            <ul class="text-gray-300 text-sm space-y-1">
+                                <li>• هندسة البرمجيات</li>
+                                <li>• نظم المعلومات</li>
+                                <li>• تحليل البيانات</li>
+                                <li>• تطوير الألعاب</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-[#0f172a] p-4 rounded-lg">
+                            <h4 class="text-purple-400 font-medium mb-2">تخصصات إبداعية</h4>
+                            <ul class="text-gray-300 text-sm space-y-1">
+                                <li>• تصميم الجرافيك</li>
+                                <li>• تطوير الويب</li>
+                                <li>• تصميم الواجهات</li>
+                                <li>• الإنتاج الرقمي</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-[#0f172a] p-4 rounded-lg">
+                            <h4 class="text-purple-400 font-medium mb-2">تخصصات إدارية</h4>
+                            <ul class="text-gray-300 text-sm space-y-1">
+                                <li>• إدارة تكنولوجيا المعلومات</li>
+                                <li>• التجارة الإلكترونية</li>
+                                <li>• التسويق الرقمي</li>
+                                <li>• إدارة المشاريع التقنية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0f172a] p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-white mb-4">فوائد BTEC للطلاب</h3>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-purple-600 p-2 rounded-full mr-3">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">معترف به عالميًا</h4>
+                                <p class="text-gray-400 text-sm">معترف به من قبل الجامعات والشركات في مختلف أنحاء العالم
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-600 p-2 rounded-full mr-3">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">تركيز عملي</h4>
+                                <p class="text-gray-400 text-sm">يركز على المهارات العملية التي يحتاجها سوق العمل</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-600 p-2 rounded-full mr-3">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">مرونة في التعليم</h4>
+                                <p class="text-gray-400 text-sm">يوفر خيارات متعددة للتعلم والتقييم</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-600 p-2 rounded-full mr-3">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">مسار وظيفي واضح</h4>
+                                <p class="text-gray-400 text-sm">يؤهل الطلاب مباشرة لسوق العمل أو للدراسة الجامعية</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <a href="#"
+                            class="btn-3d bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 inline-block">
+                            تعرف على المزيد
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-[#0f172a]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-300 mb-12">الأسئلة الشائعة</h2>
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ 1 -->
+                <div class="mb-4">
+                    <button onclick="toggleFAQ(1)"
+                        class="faq-question w-full text-right bg-[#1e293b] text-white p-4 rounded-lg flex justify-between items-center transition duration-300">
+                        <span>ما هو برنامج BTEC IT؟</span>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"
+                            id="faq-icon-1"></i>
+                    </button>
+                    <div id="faq-answer-1" class="faq-answer hidden bg-[#1e293b] mt-1 p-4 rounded-b-lg text-gray-300">
+                        BTEC IT هو مؤهل مهني دولي معترف به في مجال تكنولوجيا المعلومات، يركز على الجانب العملي والتطبيقي
+                        لتأهيل الطلاب لسوق العمل أو للدراسة الجامعية. يوفر البرنامج مهارات تقنية وعملية في مجالات مختلفة
+                        مثل البرمجة، الشبكات، قواعد البيانات، وتطوير الويب.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="mb-4">
+                    <button onclick="toggleFAQ(2)"
+                        class="faq-question w-full text-right bg-[#1e293b] text-white p-4 rounded-lg flex justify-between items-center transition duration-300">
+                        <span>ما هي مزايا دراسة BTEC IT؟</span>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"
+                            id="faq-icon-2"></i>
+                    </button>
+                    <div id="faq-answer-2" class="faq-answer hidden bg-[#1e293b] mt-1 p-4 rounded-b-lg text-gray-300">
+                        من أهم مزايا BTEC IT:
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>معترف به عالميًا من قبل الجامعات والشركات</li>
+                            <li>يركز على الجانب العملي والتطبيقي</li>
+                            <li>يوفر مهارات مطلوبة في سوق العمل</li>
+                            <li>يؤهل للالتحاق بالجامعات دون سنة تحضيرية</li>
+                            <li>يوفر مرونة في طرق التقييم</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="mb-4">
+                    <button onclick="toggleFAQ(3)"
+                        class="faq-question w-full text-right bg-[#1e293b] text-white p-4 rounded-lg flex justify-between items-center transition duration-300">
+                        <span>ما هي الجامعات التي تقبل شهادة BTEC IT؟</span>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"
+                            id="faq-icon-3"></i>
+                    </button>
+                    <div id="faq-answer-3" class="faq-answer hidden bg-[#1e293b] mt-1 p-4 rounded-b-lg text-gray-300">
+                        تقبل شهادة BTEC IT في العديد من الجامعات المحلية والعالمية، بما في ذلك جامعات المملكة المتحدة
+                        وأمريكا وكندا وأستراليا، بالإضافة إلى جامعات في الأردن والوطن العربي. يمكن للطلاب الالتحاق
+                        بتخصصات الحاسوب وتكنولوجيا المعلومات أو التخصصات ذات الصلة.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="mb-4">
+                    <button onclick="toggleFAQ(4)"
+                        class="faq-question w-full text-right bg-[#1e293b] text-white p-4 rounded-lg flex justify-between items-center transition duration-300">
+                        <span>كيف يمكن لطلاب الصف التاسع اختيار التخصص؟</span>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"
+                            id="faq-icon-4"></i>
+                    </button>
+                    <div id="faq-answer-4" class="faq-answer hidden bg-[#1e293b] mt-1 p-4 rounded-b-lg text-gray-300">
+                        ننصح طلاب الصف التاسع الراغبين في اختيار تخصص BTEC IT بما يلي:
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>حضور جلسات التوجيه المهني بالمدرسة</li>
+                            <li>التحدث مع طلاب BTEC الحاليين</li>
+                            <li>استكشاف ميولهم وقدراتهم في المجال التقني</li>
+                            <li>زيارة موقع Pearson الرسمي للتعرف على البرنامج</li>
+                            <li>التواصل مع معلمي القسم للاستفسار</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="mb-4">
+                    <button onclick="toggleFAQ(5)"
+                        class="faq-question w-full text-right bg-[#1e293b] text-white p-4 rounded-lg flex justify-between items-center transition duration-300">
+                        <span>ما هي فرص العمل بعد التخرج من BTEC IT؟</span>
+                        <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"
+                            id="faq-icon-5"></i>
+                    </button>
+                    <div id="faq-answer-5" class="faq-answer hidden bg-[#1e293b] mt-1 p-4 rounded-b-lg text-gray-300">
+                        يوفر BTEC IT للخريجين فرص عمل في العديد من المجالات مثل:
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>مبرمج تطبيقات أو مواقع إلكترونية</li>
+                            <li>فني شبكات وحواسيب</li>
+                            <li>مصمم جرافيك أو واجهات مستخدم</li>
+                            <li>أخصائي دعم فني</li>
+                            <li>مدخل بيانات أو مسؤول قواعد بيانات</li>
+                            <li>مختبر برمجيات</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="bg-[#0f172a] p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-white mb-4">المطورات ومؤسسين الموقع:</h3>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="bg-purple-600 p-2 rounded-full mr-3">
+                    <i class="fas fa-user text-white"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium">شهد عزوز</h4>
+                    <p class="text-gray-400">طالبة الصف العاشر - BTEC IT</p>
+                    <a href="mailto:2001890667@jolearn.jo"
+                        class="text-purple-400 hover:text-purple-300 text-sm">2001890667@jolearn.jo</a>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-purple-600 p-2 rounded-full mr-3">
+                    <i class="fas fa-user text-white"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium">زين نوفان</h4>
+                    <p class="text-gray-400">طالبة الصف العاشر - BTEC IT</p>
+                    <a href="mailto:2001827286@jolearn.jo"
+                        class="text-purple-400 hover:text-purple-300 text-sm">2001827286@jolearn.jo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-[#0f172a] p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-semibold text-white mb-4">تابعنا على</h3>
+
+        <div class="flex justify-center space-x-6 rtl:space-x-reverse">
+            <a href="https://www.facebook.com/share/1ENUQ2xzoh/" target="_blank"
+                class="btn-3d bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition duration-300">
+                <i class="fab fa-facebook-f text-xl"></i>
+            </a>
+            <a href="https://youtube.com/channel/UCknowtPOLV0HejgZEPglHag?si=OpkX4IjioB09VCtJ" target="_blank"
+                class="btn-3d bg-red-600 hover:bg-red-700 text-white p-3 rounded-full transition duration-300">
+                <i class="fab fa-youtube text-xl"></i>
+            </a>
+            <a href="#"
+                class="btn-3d bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full transition duration-300">
+                <i class="fas fa-globe text-xl"></i>
+            </a>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+
+    <!-- Contact Section (ضعه قبل الفوتر أو في المكان المناسب) -->
+    <section id="contact" class="py-16 bg-[#1e1b4b]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-300 mb-8">أرسل رسالة</h2>
+            <form id="contactForm" action="https://formspree.io/f/mvgajpzz" method="POST"
+                class="max-w-xl mx-auto bg-[#0f172a] p-8 rounded-lg shadow-lg space-y-6 relative z-10">
+                <div>
+                    <label class="block mb-2 text-white" for="name">الاسم الكامل</label>
+                    <input id="name" name="name" type="text" required
+                        class="form-input w-full p-3 rounded bg-white text-black" autocomplete="off" />
+                </div>
+                <div>
+                    <label class="block mb-2 text-white" for="email">البريد الإلكتروني</label>
+                    <input id="email" name="email" type="email" required
+                        class="form-input w-full p-3 rounded bg-white text-black" autocomplete="off" />
+                </div>
+                <div>
+                    <label class="block mb-2 text-white" for="subject">الموضوع</label>
+                    <input id="subject" name="subject" type="text" required
+                        class="form-input w-full p-3 rounded bg-white text-black" autocomplete="off" />
+                </div>
+                <div>
+                    <label class="block mb-2 text-white" for="message">الرسالة</label>
+                    <textarea id="message" name="message" required
+                        class="form-input w-full p-3 rounded bg-white text-black" rows="5"
+                        autocomplete="off"></textarea>
+                </div>
+                <!-- كاباتشا بسيطة -->
+                <div>
+                    <label class="block mb-2 text-white" id="captcha-label"></label>
+                    <input type="text" id="captcha-input" required
+                        class="form-input w-full p-3 rounded bg-white text-black" autocomplete="off" />
+                    <input type="hidden" id="captcha-answer" />
+                    <span id="captcha-error" class="text-red-400 text-sm hidden">إجابة الكاباتشا غير صحيحة</span>
+                </div>
+                <button type="submit"
+                    class="btn-3d bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg w-full">إرسال</button>
+                <div id="form-success" class="text-green-400 text-center mt-4 hidden">تم إرسال رسالتك بنجاح!</div>
+            </form>
+        </div>
+    </section>
+    <script>
+        // كود الكاباتشا البسيط
+        function generateCaptcha() {
+            const a = Math.floor(Math.random() * 10) + 1;
+            const b = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('captcha-label').textContent = `كم حاصل جمع ${a} + ${b} ؟`;
+            document.getElementById('captcha-answer').value = a + b;
+        }
+        generateCaptcha();
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            const answer = document.getElementById('captcha-answer').value;
+            const userInput = document.getElementById('captcha-input').value;
+            if (parseInt(userInput) !== parseInt(answer)) {
+                e.preventDefault();
+                document.getElementById('captcha-error').classList.remove('hidden');
+                generateCaptcha();
+                return false;
+            } else {
+                document.getElementById('captcha-error').classList.add('hidden');
+            }
+            // إظهار رسالة نجاح بعد الإرسال (اختياري)
+            setTimeout(function () {
+                document.getElementById('form-success').classList.remove('hidden');
+            }, 1000);
+        });
+    </script>
+
+    <!-- تعليمات تغيير الإيميل: 
+- أنشئ حساب في formspree.io أو emailjs.com
+- ضع رابط الفورم الخاص بك مكان {YOUR_FORM_ID} في action
+- يمكنك إضافة عدة إيميلات من إعدادات الخدمة نفسها
+-->
+
+    <!-- Footer -->
+    <footer class="bg-[#0f172a] py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-purple-300 mb-4">عن الموقع</h3>
+                    <p class="text-gray-400">
+                        موقع رسمي لقسم BTEC IT في مدرسة عائشة أم المؤمنين الأساسية المختلطة - لواء سحاب. صمم الموقع
+                        بواسطة الطالبتين شهد عزوز وزين نوفان تحت إشراف المعلمة سماح أبو جراد.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-purple-300 mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home"
+                                class="text-gray-400 hover:text-purple-300 transition duration-300">الرئيسية</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-purple-300 transition duration-300">عن
+                                القسم</a></li>
+                        <li><a href="#projects"
+                                class="text-gray-400 hover:text-purple-300 transition duration-300">مشاريعنا</a></li>
+                        <li><a href="#teachers"
+                                class="text-gray-400 hover:text-purple-300 transition duration-300">الهيئة التدريسية</a>
+                        </li>
+                        <li><a href="#library" class="text-gray-400 hover:text-purple-300 transition duration-300">مكتبة
+                                التحميلات</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-purple-300 mb-4">تابعنا</h3>
+                    <div class="flex space-x-4 rtl:space-x-reverse">
+                        <a href="https://www.facebook.com/share/1ENUQ2xzoh/" target="_blank"
+                            class="text-gray-400 hover:text-blue-400 transition duration-300 text-2xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://youtube.com/channel/UCknowtPOLV0HejgZEPglHag?si=OpkX4IjioB09VCtJ"
+                            target="_blank" class="text-gray-400 hover:text-red-500 transition duration-300 text-2xl">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition duration-300 text-2xl">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+
+                    <div class="mt-6">
+                        <a href="https://www.pearson.com/en-us.html" target="_blank" class="inline-block">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 mt-6">
+            جميع الحقوق محفوظة © 2025 - زين نوفان أبو زيد & شهد حسام عزوز
+        </div>
+    </footer>
+    <script>
+        // Accordion FAQ
+        function toggleFAQ(num) {
+            // أغلق جميع الأجوبة أولاً
+            for (let i = 1; i <= 5; i++) {
+                if (i !== num) {
+                    document.getElementById('faq-answer-' + i).classList.add('hidden');
+                    document.getElementById('faq-icon-' + i).style.transform = 'rotate(0deg)';
+                }
+            }
+            // افتح/أغلق العنصر المطلوب
+            const answer = document.getElementById('faq-answer-' + num);
+            const icon = document.getElementById('faq-icon-' + num);
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+
+</html>
